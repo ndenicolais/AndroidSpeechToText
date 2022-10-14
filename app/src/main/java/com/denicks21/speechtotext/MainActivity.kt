@@ -63,15 +63,15 @@ class MainActivity : AppCompatActivity() {
 
         } else {
             // Save the file
-            var output = File(applicationContext.getExternalFilesDir(null),
-                "fileText.txt")
+            var output = File(Environment.getExternalStorageDirectory().toString() +
+                    "/" + "TextFile.txt")
 
             // If file exists do not overwrite but increment name
             var n = 0
             while (output.exists()) {
                 ++n
-                output = File(applicationContext.getExternalFilesDir(null),
-                    "fileText$n.txt")
+                output = File(Environment.getExternalStorageDirectory().toString() +
+                        "/" + "TextFile$n.txt")
             }
 
             try {
