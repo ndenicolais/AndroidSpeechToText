@@ -1,15 +1,21 @@
 package com.denicks21.speechtotext
 
+import android.Manifest
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
+import android.provider.Settings
 import android.speech.RecognizerIntent
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStreamWriter
@@ -21,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        RequestPermissions()
         textOutput = findViewById(R.id.textOutput)
 
         findViewById<Button>(R.id.speech_button).setOnClickListener {
@@ -86,6 +92,12 @@ class MainActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
         }
+    }
+
+    private fun RequestPermissions() {
+        ActivityCompat.requestPermissions(this@MainActivity,
+            arrayOf(Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE),
+            REQUEST_CODE)
     }
 
     companion object {
